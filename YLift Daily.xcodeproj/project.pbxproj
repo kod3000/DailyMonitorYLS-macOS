@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D84439C2C31D20600F5F93F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D84439B2C31D20600F5F93F /* Info.plist */; };
 		3DDB2FEF2C2B655E00392779 /* yliftdailyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB2FEE2C2B655E00392779 /* yliftdailyApp.swift */; };
 		3DDB2FF12C2B655E00392779 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB2FF02C2B655E00392779 /* ContentView.swift */; };
 		3DDB2FF32C2B656100392779 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DDB2FF22C2B656100392779 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D84439B2C31D20600F5F93F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DDB2FEB2C2B655E00392779 /* Y-Lift Daily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Y-Lift Daily.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DDB2FEE2C2B655E00392779 /* yliftdailyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yliftdailyApp.swift; sourceTree = "<group>"; };
 		3DDB2FF02C2B655E00392779 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				3DDB2FF42C2B656100392779 /* Preview Content */,
 				3DDB30292C2C35B500392779 /* Config.swift */,
 				3DDB302D2C2C3F6800392779 /* config.plist */,
+				3D84439B2C31D20600F5F93F /* Info.plist */,
 			);
 			path = yliftdaily;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D84439C2C31D20600F5F93F /* Info.plist in Resources */,
 				3DDB2FF62C2B656100392779 /* Preview Assets.xcassets in Resources */,
 				3DDB2FF32C2B656100392779 /* Assets.xcassets in Resources */,
 				3DDB302E2C2C3F6800392779 /* config.plist in Resources */,

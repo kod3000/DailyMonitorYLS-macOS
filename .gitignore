@@ -91,3 +91,7 @@ iOSInjectionProject/
 .DS_Store
 
 config.plist
+
+# Local Databases
+*.sqlite
+*.db

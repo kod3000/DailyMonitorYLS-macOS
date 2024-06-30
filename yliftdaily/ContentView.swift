@@ -232,7 +232,7 @@ struct ContentView: View {
                                          .frame(maxWidth: .infinity, alignment: .leading)
                                      Text(account.email)
                                          .frame(maxWidth: .infinity, alignment: .leading)
-                                     Text(account.recentlyOrdered ? "Order is Completed" : "Building Order..")
+                                     Text(account.recentlyOrdered ? "Order is Completed" : "Building an Order..")
                                          .frame(maxWidth: .infinity, alignment: .leading)
                                  }
                              }
@@ -262,6 +262,8 @@ struct ContentView: View {
      }
     
     func fetchData() {
+        print("\nhello monitor, how are we feeling today?\n")
+        print(Config.shared.value(forKey: "API_URL") as? String ?? "")
         fetchActivityData(retries: 3)
         fetchProbabilityData(retries: 3)
         fetchAccountsData(retries: 3)
