@@ -1,0 +1,631 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3DDB2FEF2C2B655E00392779 /* yliftdailyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB2FEE2C2B655E00392779 /* yliftdailyApp.swift */; };
+		3DDB2FF12C2B655E00392779 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB2FF02C2B655E00392779 /* ContentView.swift */; };
+		3DDB2FF32C2B656100392779 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DDB2FF22C2B656100392779 /* Assets.xcassets */; };
+		3DDB2FF62C2B656100392779 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DDB2FF52C2B656100392779 /* Preview Assets.xcassets */; };
+		3DDB2FF82C2B656100392779 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB2FF72C2B656100392779 /* Persistence.swift */; };
+		3DDB2FFB2C2B656100392779 /* yliftdaily.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB2FF92C2B656100392779 /* yliftdaily.xcdatamodeld */; };
+		3DDB30062C2B656200392779 /* yliftdailyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB30052C2B656200392779 /* yliftdailyTests.swift */; };
+		3DDB30102C2B656200392779 /* yliftdailyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB300F2C2B656200392779 /* yliftdailyUITests.swift */; };
+		3DDB30122C2B656200392779 /* yliftdailyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB30112C2B656200392779 /* yliftdailyUITestsLaunchTests.swift */; };
+		3DDB30202C2B66DA00392779 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 3DDB301F2C2B66DA00392779 /* SwiftUICharts */; };
+		3DDB302A2C2C35B500392779 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB30292C2C35B500392779 /* Config.swift */; };
+		3DDB302E2C2C3F6800392779 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DDB302D2C2C3F6800392779 /* config.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3DDB30022C2B656200392779 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3DDB2FE32C2B655E00392779 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3DDB2FEA2C2B655E00392779;
+			remoteInfo = yliftdaily;
+		};
+		3DDB300C2C2B656200392779 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3DDB2FE32C2B655E00392779 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3DDB2FEA2C2B655E00392779;
+			remoteInfo = yliftdaily;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3DDB2FEB2C2B655E00392779 /* Y-Lift Daily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Y-Lift Daily.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DDB2FEE2C2B655E00392779 /* yliftdailyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yliftdailyApp.swift; sourceTree = "<group>"; };
+		3DDB2FF02C2B655E00392779 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3DDB2FF22C2B656100392779 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3DDB2FF52C2B656100392779 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3DDB2FF72C2B656100392779 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		3DDB2FFA2C2B656100392779 /* yliftdaily.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = yliftdaily.xcdatamodel; sourceTree = "<group>"; };
+		3DDB2FFC2C2B656100392779 /* yliftdaily.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = yliftdaily.entitlements; sourceTree = "<group>"; };
+		3DDB30012C2B656200392779 /* YLift DailyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "YLift DailyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DDB30052C2B656200392779 /* yliftdailyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yliftdailyTests.swift; sourceTree = "<group>"; };
+		3DDB300B2C2B656200392779 /* YLift DailyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "YLift DailyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DDB300F2C2B656200392779 /* yliftdailyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yliftdailyUITests.swift; sourceTree = "<group>"; };
+		3DDB30112C2B656200392779 /* yliftdailyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yliftdailyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3DDB30292C2C35B500392779 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		3DDB302D2C2C3F6800392779 /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3DDB2FE82C2B655E00392779 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DDB30202C2B66DA00392779 /* SwiftUICharts in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DDB2FFE2C2B656200392779 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DDB30082C2B656200392779 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3DDB2FE22C2B655E00392779 = {
+			isa = PBXGroup;
+			children = (
+				3DDB2FED2C2B655E00392779 /* yliftdaily */,
+				3DDB30042C2B656200392779 /* yliftdailyTests */,
+				3DDB300E2C2B656200392779 /* yliftdailyUITests */,
+				3DDB2FEC2C2B655E00392779 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3DDB2FEC2C2B655E00392779 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3DDB2FEB2C2B655E00392779 /* Y-Lift Daily.app */,
+				3DDB30012C2B656200392779 /* YLift DailyTests.xctest */,
+				3DDB300B2C2B656200392779 /* YLift DailyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3DDB2FED2C2B655E00392779 /* yliftdaily */ = {
+			isa = PBXGroup;
+			children = (
+				3DDB2FEE2C2B655E00392779 /* yliftdailyApp.swift */,
+				3DDB2FF02C2B655E00392779 /* ContentView.swift */,
+				3DDB2FF22C2B656100392779 /* Assets.xcassets */,
+				3DDB2FF72C2B656100392779 /* Persistence.swift */,
+				3DDB2FFC2C2B656100392779 /* yliftdaily.entitlements */,
+				3DDB2FF92C2B656100392779 /* yliftdaily.xcdatamodeld */,
+				3DDB2FF42C2B656100392779 /* Preview Content */,
+				3DDB30292C2C35B500392779 /* Config.swift */,
+				3DDB302D2C2C3F6800392779 /* config.plist */,
+			);
+			path = yliftdaily;
+			sourceTree = "<group>";
+		};
+		3DDB2FF42C2B656100392779 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				3DDB2FF52C2B656100392779 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3DDB30042C2B656200392779 /* yliftdailyTests */ = {
+			isa = PBXGroup;
+			children = (
+				3DDB30052C2B656200392779 /* yliftdailyTests.swift */,
+			);
+			path = yliftdailyTests;
+			sourceTree = "<group>";
+		};
+		3DDB300E2C2B656200392779 /* yliftdailyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3DDB300F2C2B656200392779 /* yliftdailyUITests.swift */,
+				3DDB30112C2B656200392779 /* yliftdailyUITestsLaunchTests.swift */,
+			);
+			path = yliftdailyUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3DDB2FEA2C2B655E00392779 /* YLift Daily */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DDB30152C2B656200392779 /* Build configuration list for PBXNativeTarget "YLift Daily" */;
+			buildPhases = (
+				3DDB2FE72C2B655E00392779 /* Sources */,
+				3DDB2FE82C2B655E00392779 /* Frameworks */,
+				3DDB2FE92C2B655E00392779 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "YLift Daily";
+			packageProductDependencies = (
+				3DDB301F2C2B66DA00392779 /* SwiftUICharts */,
+			);
+			productName = yliftdaily;
+			productReference = 3DDB2FEB2C2B655E00392779 /* Y-Lift Daily.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3DDB30002C2B656200392779 /* YLift DailyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DDB30182C2B656200392779 /* Build configuration list for PBXNativeTarget "YLift DailyTests" */;
+			buildPhases = (
+				3DDB2FFD2C2B656200392779 /* Sources */,
+				3DDB2FFE2C2B656200392779 /* Frameworks */,
+				3DDB2FFF2C2B656200392779 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3DDB30032C2B656200392779 /* PBXTargetDependency */,
+			);
+			name = "YLift DailyTests";
+			productName = yliftdailyTests;
+			productReference = 3DDB30012C2B656200392779 /* YLift DailyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3DDB300A2C2B656200392779 /* YLift DailyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DDB301B2C2B656200392779 /* Build configuration list for PBXNativeTarget "YLift DailyUITests" */;
+			buildPhases = (
+				3DDB30072C2B656200392779 /* Sources */,
+				3DDB30082C2B656200392779 /* Frameworks */,
+				3DDB30092C2B656200392779 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3DDB300D2C2B656200392779 /* PBXTargetDependency */,
+			);
+			name = "YLift DailyUITests";
+			productName = yliftdailyUITests;
+			productReference = 3DDB300B2C2B656200392779 /* YLift DailyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3DDB2FE32C2B655E00392779 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					3DDB2FEA2C2B655E00392779 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					3DDB30002C2B656200392779 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 3DDB2FEA2C2B655E00392779;
+					};
+					3DDB300A2C2B656200392779 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 3DDB2FEA2C2B655E00392779;
+					};
+				};
+			};
+			buildConfigurationList = 3DDB2FE62C2B655E00392779 /* Build configuration list for PBXProject "YLift Daily" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3DDB2FE22C2B655E00392779;
+			packageReferences = (
+				3DDB301E2C2B66DA00392779 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
+			);
+			productRefGroup = 3DDB2FEC2C2B655E00392779 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3DDB2FEA2C2B655E00392779 /* YLift Daily */,
+				3DDB30002C2B656200392779 /* YLift DailyTests */,
+				3DDB300A2C2B656200392779 /* YLift DailyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3DDB2FE92C2B655E00392779 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DDB2FF62C2B656100392779 /* Preview Assets.xcassets in Resources */,
+				3DDB2FF32C2B656100392779 /* Assets.xcassets in Resources */,
+				3DDB302E2C2C3F6800392779 /* config.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DDB2FFF2C2B656200392779 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DDB30092C2B656200392779 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3DDB2FE72C2B655E00392779 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DDB2FF82C2B656100392779 /* Persistence.swift in Sources */,
+				3DDB2FF12C2B655E00392779 /* ContentView.swift in Sources */,
+				3DDB302A2C2C35B500392779 /* Config.swift in Sources */,
+				3DDB2FFB2C2B656100392779 /* yliftdaily.xcdatamodeld in Sources */,
+				3DDB2FEF2C2B655E00392779 /* yliftdailyApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DDB2FFD2C2B656200392779 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DDB30062C2B656200392779 /* yliftdailyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DDB30072C2B656200392779 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DDB30102C2B656200392779 /* yliftdailyUITests.swift in Sources */,
+				3DDB30122C2B656200392779 /* yliftdailyUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3DDB30032C2B656200392779 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3DDB2FEA2C2B655E00392779 /* YLift Daily */;
+			targetProxy = 3DDB30022C2B656200392779 /* PBXContainerItemProxy */;
+		};
+		3DDB300D2C2B656200392779 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3DDB2FEA2C2B655E00392779 /* YLift Daily */;
+			targetProxy = 3DDB300C2C2B656200392779 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3DDB30132C2B656200392779 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.7;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3DDB30142C2B656200392779 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.7;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		3DDB30162C2B656200392779 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = yliftdaily/yliftdaily.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"yliftdaily/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = yliftdaily/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = systems.kod.yliftdaily;
+				PRODUCT_NAME = "Y-Lift Daily";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		3DDB30172C2B656200392779 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = yliftdaily/yliftdaily.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"yliftdaily/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = yliftdaily/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = systems.kod.yliftdaily;
+				PRODUCT_NAME = "Y-Lift Daily";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		3DDB30192C2B656200392779 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.7;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = systems.kod.yliftdailyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YLift Daily.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/YLift Daily";
+			};
+			name = Debug;
+		};
+		3DDB301A2C2B656200392779 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.7;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = systems.kod.yliftdailyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YLift Daily.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/YLift Daily";
+			};
+			name = Release;
+		};
+		3DDB301C2C2B656200392779 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = systems.kod.yliftdailyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = yliftdaily;
+			};
+			name = Debug;
+		};
+		3DDB301D2C2B656200392779 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = systems.kod.yliftdailyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = yliftdaily;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3DDB2FE62C2B655E00392779 /* Build configuration list for PBXProject "YLift Daily" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DDB30132C2B656200392779 /* Debug */,
+				3DDB30142C2B656200392779 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3DDB30152C2B656200392779 /* Build configuration list for PBXNativeTarget "YLift Daily" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DDB30162C2B656200392779 /* Debug */,
+				3DDB30172C2B656200392779 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3DDB30182C2B656200392779 /* Build configuration list for PBXNativeTarget "YLift DailyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DDB30192C2B656200392779 /* Debug */,
+				3DDB301A2C2B656200392779 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3DDB301B2C2B656200392779 /* Build configuration list for PBXNativeTarget "YLift DailyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DDB301C2C2B656200392779 /* Debug */,
+				3DDB301D2C2B656200392779 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3DDB301E2C2B66DA00392779 /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/willdale/SwiftUICharts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3DDB301F2C2B66DA00392779 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DDB301E2C2B66DA00392779 /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		3DDB2FF92C2B656100392779 /* yliftdaily.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3DDB2FFA2C2B656100392779 /* yliftdaily.xcdatamodel */,
+			);
+			currentVersion = 3DDB2FFA2C2B656100392779 /* yliftdaily.xcdatamodel */;
+			path = yliftdaily.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 3DDB2FE32C2B655E00392779 /* Project object */;
+}
