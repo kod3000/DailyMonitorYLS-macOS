@@ -31,7 +31,7 @@ struct yliftdailyApp: App {
                      .onAppear {
                          let startTime = Date()
                                   Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-                                      if !self.isLoading || Date().timeIntervalSince(startTime) >= 20 {
+                                      if !self.isLoading || Date().timeIntervalSince(startTime) >= 10 {
                                           withAnimation {
                                               self.isLoading = false
                                           }

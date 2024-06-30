@@ -174,6 +174,8 @@ struct ContentView: View {
     @State private var accounts: [Account] = []
     @State private var accountsTimer: Timer?
     @State private var knownAccountIds: Set<Int> = []
+    
+    @State private var dataLoadingComplete = false
     @Binding var isLoading: Bool
 
     var body: some View {
@@ -263,30 +265,49 @@ struct ContentView: View {
      }
     
     func fetchData() {
-        print("\nhello monitor, how are we feeling today?\n")
-        print(Config.shared.value(forKey: "API_URL") as? String ?? "")
-        
-        let group = DispatchGroup()
-        
-        group.enter()
-        fetchActivityData(retries: 3) { success in
-            if success { group.leave() }
-        }
-        
-        group.enter()
-        fetchProbabilityData(retries: 3) { success in
-            if success { group.leave() }
-        }
-        
-        group.enter()
-        fetchAccountsData(retries: 3) { success in
-            if success { group.leave() }
-        }
-        
-        group.notify(queue: .main) {
-            self.isLoading = false
-        }
-    }
+         let startTime = Date()
+         
+         // Your existing fetchInitialData logic here
+         fetchInitialData { success in
+             self.dataLoadingComplete = success
+             let elapsedTime = Date().timeIntervalSince(startTime)
+             let remainingTime = max(10 - elapsedTime, 0)
+             
+             DispatchQueue.main.asyncAfter(deadline: .now() + remainingTime) {
+                 self.isLoading = false
+             }
+         }
+     }
+     
+     func fetchInitialData(completion: @escaping (Bool) -> Void) {
+         let group = DispatchGroup()
+         var overallSuccess = true
+         
+         group.enter()
+         fetchActivityData(retries: 3) { success in
+             if !success { overallSuccess = false }
+             group.leave()
+         }
+         
+         group.enter()
+         fetchProbabilityData(retries: 3) { success in
+             if !success { overallSuccess = false }
+             group.leave()
+         }
+         
+         group.enter()
+         fetchAccountsData(retries: 3) { success in
+             if !success { overallSuccess = false }
+             group.leave()
+         }
+         
+         group.notify(queue: .main) {
+             completion(overallSuccess)
+             if overallSuccess {
+                 self.startAccountsTimer()
+             }
+         }
+     }
     
     func startAccountsTimer() {
           accountsTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
