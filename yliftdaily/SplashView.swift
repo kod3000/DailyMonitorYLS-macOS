@@ -10,7 +10,7 @@ import SwiftUI
 struct SplashView: View {
     var body: some View {
         GeometryReader { geometry in
-            Image("splash") // Note: We don't include the file extension here
+            Image("splash") 
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: geometry.size.width, height: geometry.size.height)

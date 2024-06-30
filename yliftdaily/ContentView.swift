@@ -179,89 +179,100 @@ struct ContentView: View {
     @Binding var isLoading: Bool
 
     var body: some View {
-         ScrollView {
-             VStack(spacing: 20) {
-                 // Activity Section
-                 VStack {
-                     if let activity = activityResponse {
-                         HStack {
-                             Spacer()
-                             TimerView(lastActive: activity.lastActive, isActive: activity.isActive)
-                                 .padding(5)
-                         }
-                     } else {
-                         Text("Loading activity data...")
-                     }
-                 }
-                 .padding(10)
-                 .background(Color.gray.opacity(0.1))
-                 .cornerRadius(10)
-                 
-                 // Probability Chart Section
-                 VStack {
-                     if let probability = probabilityResponse {
-                         BusyTimesChartView(busyTimesResponse: probability)
-                     } else {
-                         Text("Loading probability data...")
-                     }
-                 }
-                 .padding(10)
-                 .frame(minHeight: 400)
-                 .background(Color.gray.opacity(0.1))
-                 .cornerRadius(10)
-                 
-                 // Customer Carts Section
-                 VStack {
-                     // Header titles
-                     HStack {
-                         Text("Name")
-                             .fontWeight(.bold)
-                             .frame(maxWidth: .infinity, alignment: .leading)
-                         Text("Email")
-                             .fontWeight(.bold)
-                             .frame(maxWidth: .infinity, alignment: .leading)
-                         Text("Status")
-                             .fontWeight(.bold)
-                             .frame(maxWidth: .infinity, alignment: .leading)
-                     }
-                     .padding(.bottom, 5)
-                     
-                     // Scrollable list
-                     ScrollView {
-                         LazyVStack(alignment: .leading, spacing: 10) {
-                             ForEach(accounts) { account in
-                                 HStack {
-                                     Text(account.name)
-                                         .frame(maxWidth: .infinity, alignment: .leading)
-                                     Text(account.email)
-                                         .frame(maxWidth: .infinity, alignment: .leading)
-                                     Text(account.recentlyOrdered ? "Order is Completed" : "Building an Order..")
-                                         .frame(maxWidth: .infinity, alignment: .leading)
-                                 }
-                             }
-                         }
-                     }
-                     .frame(height: 200)
-                     
-                     Text("Live Carts")
-                         .font(.title)
-                         .frame(maxWidth: .infinity, alignment: .trailing)
-                         .padding(.top, 10)
-                 }
-                 .padding(10)
-                 .background(Color.gray.opacity(0.1))
-                 .cornerRadius(10)
-             }
-             .padding(20)
-             .frame(maxWidth: .infinity, alignment: .center)
-         }
-         .onAppear {
-             fetchData()
-             stopAccountsTimer()
-         }
-         .onDisappear {
-             stopAccountsTimer()
-         }
+        ZStack{
+            GeometryReader { geometry in
+                Image("splash") 
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .clipped()
+                    .opacity(0.015)
+            }
+            .edgesIgnoringSafeArea(.all)
+        ScrollView {
+            VStack(spacing: 20) {
+                // Activity Section
+                VStack {
+                    if let activity = activityResponse {
+                        HStack {
+                            Spacer()
+                            TimerView(lastActive: activity.lastActive, isActive: activity.isActive)
+                                .padding(5)
+                        }
+                    } else {
+                        Text("Loading activity data...")
+                    }
+                }
+                .padding(10)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+                
+                // Probability Chart Section
+                VStack {
+                    if let probability = probabilityResponse {
+                        BusyTimesChartView(busyTimesResponse: probability)
+                    } else {
+                        Text("Loading probability data...")
+                    }
+                }
+                .padding(10)
+                .frame(minHeight: 400)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+                
+                // Customer Carts Section
+                VStack {
+                    // Header titles
+                    HStack {
+                        Text("Name")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Text("Email")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Text("Status")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .padding(.bottom, 5)
+                    
+                    // Scrollable list
+                    ScrollView {
+                        LazyVStack(alignment: .leading, spacing: 10) {
+                            ForEach(accounts) { account in
+                                HStack {
+                                    Text(account.name)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    Text(account.email)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    Text(account.recentlyOrdered ? "Order is Completed" : "Building an Order..")
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                            }
+                        }
+                    }
+                    .frame(height: 200)
+                    
+                    Text("Live Carts")
+                        .font(.title)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.top, 10)
+                }
+                .padding(10)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+            }
+            .padding(20)
+            .frame(maxWidth: .infinity, alignment: .center)
+        }
+        .onAppear {
+            fetchData()
+            stopAccountsTimer()
+        }
+        .onDisappear {
+            stopAccountsTimer()
+        }
+    }
      }
     
     func fetchData() {
