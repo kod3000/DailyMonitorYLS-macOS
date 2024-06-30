@@ -12,14 +12,34 @@ import AppKit
 @main
 struct yliftdailyApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @State private var isLoading = true
      let persistenceController = PersistenceController.shared
 
      var body: some Scene {
          WindowGroup {
-             ContentView()
-                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                 .frame(minWidth: 960, minHeight: 820)
-         }
+                     ZStack {
+                         ContentView(isLoading: $isLoading)
+                             .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                             .frame(minWidth: 960, minHeight: 820)
+                         
+                         if isLoading {
+                             SplashView()
+                                 .transition(.opacity)
+                                 .zIndex(1)
+                         }
+                     }
+                     .onAppear {
+                         let startTime = Date()
+                                  Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                                      if !self.isLoading || Date().timeIntervalSince(startTime) >= 20 {
+                                          withAnimation {
+                                              self.isLoading = false
+                                          }
+                                          timer.invalidate()
+                                      }
+                                  }
+                     }
+        }
          .windowStyle(TitleBarWindowStyle())
          .commands {
              CommandGroup(replacing: .newItem) { }

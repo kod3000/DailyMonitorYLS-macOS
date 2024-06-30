@@ -174,6 +174,7 @@ struct ContentView: View {
     @State private var accounts: [Account] = []
     @State private var accountsTimer: Timer?
     @State private var knownAccountIds: Set<Int> = []
+    @Binding var isLoading: Bool
 
     var body: some View {
          ScrollView {
@@ -264,14 +265,32 @@ struct ContentView: View {
     func fetchData() {
         print("\nhello monitor, how are we feeling today?\n")
         print(Config.shared.value(forKey: "API_URL") as? String ?? "")
-        fetchActivityData(retries: 3)
-        fetchProbabilityData(retries: 3)
-        fetchAccountsData(retries: 3)
+        
+        let group = DispatchGroup()
+        
+        group.enter()
+        fetchActivityData(retries: 3) { success in
+            if success { group.leave() }
+        }
+        
+        group.enter()
+        fetchProbabilityData(retries: 3) { success in
+            if success { group.leave() }
+        }
+        
+        group.enter()
+        fetchAccountsData(retries: 3) { success in
+            if success { group.leave() }
+        }
+        
+        group.notify(queue: .main) {
+            self.isLoading = false
+        }
     }
     
     func startAccountsTimer() {
           accountsTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
-              fetchAccountsData(retries: 3)
+              fetchAccountsData(retries: 3) { _ in }
           }
       }
 
@@ -280,7 +299,7 @@ struct ContentView: View {
           accountsTimer = nil
       }
     
-    func fetchActivityData(retries: Int) {
+    func fetchActivityData(retries: Int, completion: @escaping (Bool) -> Void) {
         guard let activityURL = URL(string: (Config.shared.value(forKey: "API_URL") as? String ?? "") + "activity") else { return }
 
         URLSession.shared.dataTask(with: activityURL) { data, response, error in
@@ -288,7 +307,7 @@ struct ContentView: View {
                 print("Activity data fetch error: \(error.localizedDescription)")
                 if retries > 0 {
                     DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-                        self.fetchActivityData(retries: retries - 1)
+                        self.fetchActivityData(retries: retries - 1, completion: completion)
                     }
                 }
                 return
@@ -298,7 +317,7 @@ struct ContentView: View {
                 print("No data received from activity endpoint")
                 if retries > 0 {
                     DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-                        self.fetchActivityData(retries: retries - 1)
+                        self.fetchActivityData(retries: retries - 1, completion: completion)
                     }
                 }
                 return
@@ -316,6 +335,7 @@ struct ContentView: View {
                     DispatchQueue.main.async {
                         self.activityResponse = activityResponse
                         print("Activity data loaded: \(String(describing: self.activityResponse))")
+                        completion(true)
                     }
                 } else {
                     print("Failed to parse JSON")
@@ -324,14 +344,14 @@ struct ContentView: View {
                 print("Failed to decode activity data: \(error)")
                 if retries > 0 {
                     DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-                        self.fetchActivityData(retries: retries - 1)
+                        self.fetchActivityData(retries: retries - 1, completion: completion)
                     }
                 }
             }
         }.resume()
     }
 
-    func fetchProbabilityData(retries: Int) {
+    func fetchProbabilityData(retries: Int, completion: @escaping (Bool) -> Void) {
 
         guard let probabilityURL = URL(string: (Config.shared.value(forKey: "API_URL") as? String ?? "") + "probability") else { return }
         
@@ -341,7 +361,7 @@ struct ContentView: View {
                    print("Probability data fetch error: \(error.localizedDescription)")
                    if retries > 0 {
                        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-                           self.fetchProbabilityData(retries: retries - 1)
+                           self.fetchProbabilityData(retries: retries - 1, completion: completion)
                        }
                    }
                    return
@@ -351,7 +371,7 @@ struct ContentView: View {
                    print("No data received from probability endpoint")
                    if retries > 0 {
                        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-                           self.fetchProbabilityData(retries: retries - 1)
+                           self.fetchProbabilityData(retries: retries - 1,completion: completion)
                        }
                    }
                    return
@@ -376,12 +396,13 @@ struct ContentView: View {
                        self.printDayDetails("Friday", day: decodedResponse.friday)
                        self.printDayDetails("Saturday", day: decodedResponse.saturday)
                        self.printDayDetails("Sunday", day: decodedResponse.sunday)
+                       completion(true)
                    }
                } catch {
                    print("Failed to decode probability data: \(error)")
                    if retries > 0 {
                        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-                           self.fetchProbabilityData(retries: retries - 1)
+                           self.fetchProbabilityData(retries: retries - 1, completion: completion)
                        }
                    }
                }
@@ -393,7 +414,7 @@ struct ContentView: View {
         print("\(dayName) busy hours: \(day.busyHours)")
     }
 
-    func fetchAccountsData(retries: Int) {
+    func fetchAccountsData(retries: Int, completion: @escaping (Bool) -> Void) {
         guard let accountsURL = URL(string: (Config.shared.value(forKey: "API_URL") as? String ?? "") + "accounts") else { return }
 
         
@@ -403,7 +424,7 @@ struct ContentView: View {
                 print("Accounts data fetch error: \(error.localizedDescription)")
                 if retries > 0 {
                     DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-                        self.fetchAccountsData(retries: retries - 1)
+                        self.fetchAccountsData(retries: retries - 1, completion: completion)
                     }
                 }
                 return
@@ -413,7 +434,7 @@ struct ContentView: View {
                 print("No data received from accounts endpoint")
                 if retries > 0 {
                     DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-                        self.fetchAccountsData(retries: retries - 1)
+                        self.fetchAccountsData(retries: retries - 1, completion: completion)
                     }
                 }
                 return
@@ -427,12 +448,13 @@ struct ContentView: View {
                 DispatchQueue.main.async {
                     self.checkForNewAccounts(decodedResponse)
                     self.accounts = decodedResponse
+                    completion(true)
                 }
             } catch {
                 print("Failed to decode accounts data: \(error)")
                 if retries > 0 {
                     DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-                        self.fetchAccountsData(retries: retries - 1)
+                        self.fetchAccountsData(retries: retries - 1, completion: completion)
                     }
                 }
             }
@@ -511,6 +533,6 @@ private extension DateFormatter {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView(isLoading: .constant(false) ).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

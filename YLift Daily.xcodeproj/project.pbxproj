@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D84439C2C31D20600F5F93F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D84439B2C31D20600F5F93F /* Info.plist */; };
+		3D84439E2C31F7DE00F5F93F /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D84439D2C31F7DE00F5F93F /* SplashView.swift */; };
 		3DDB2FEF2C2B655E00392779 /* yliftdailyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB2FEE2C2B655E00392779 /* yliftdailyApp.swift */; };
 		3DDB2FF12C2B655E00392779 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB2FF02C2B655E00392779 /* ContentView.swift */; };
 		3DDB2FF32C2B656100392779 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DDB2FF22C2B656100392779 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		3D84439B2C31D20600F5F93F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D84439D2C31F7DE00F5F93F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		3DDB2FEB2C2B655E00392779 /* Y-Lift Daily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Y-Lift Daily.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DDB2FEE2C2B655E00392779 /* yliftdailyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yliftdailyApp.swift; sourceTree = "<group>"; };
 		3DDB2FF02C2B655E00392779 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				3DDB30292C2C35B500392779 /* Config.swift */,
 				3DDB302D2C2C3F6800392779 /* config.plist */,
 				3D84439B2C31D20600F5F93F /* Info.plist */,
+				3D84439D2C31F7DE00F5F93F /* SplashView.swift */,
 			);
 			path = yliftdaily;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				3DDB302A2C2C35B500392779 /* Config.swift in Sources */,
 				3DDB2FFB2C2B656100392779 /* yliftdaily.xcdatamodeld in Sources */,
 				3DDB2FEF2C2B655E00392779 /* yliftdailyApp.swift in Sources */,
+				3D84439E2C31F7DE00F5F93F /* SplashView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
