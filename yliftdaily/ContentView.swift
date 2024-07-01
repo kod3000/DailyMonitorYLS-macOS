@@ -328,7 +328,7 @@ struct ContentView: View {
     
     func startAccountsTimer() {
           accountsTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
-              fetchAccountsData(retries: 3) { _ in }
+              fetchAccountsData(retries: 2) { _ in }
           }
           startInactivityTimer()
       }
@@ -343,8 +343,8 @@ struct ContentView: View {
     func startInactivityTimer() {
           inactivityTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
               let timeSinceLastNewAccount = Date().timeIntervalSince(self.lastNewAccountTime)
-              // 1800 seconds = 30 minutes
-              if timeSinceLastNewAccount > 1800 {
+              // 600 seconds = 10 minutes
+              if timeSinceLastNewAccount > 300 {
                   self.fetchActivityData(retries: 3) { _ in }
                   self.lastNewAccountTime = Date()
               }
@@ -519,7 +519,6 @@ struct ContentView: View {
     }
 
     func checkForNewAccounts(_ newAccounts: [Account]) {
-        var foundNewAccount = false
         for account in newAccounts {
             if !knownAccountIds.contains(account.id) {
                 sendNotification(for: account)
