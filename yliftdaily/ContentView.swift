@@ -178,6 +178,9 @@ struct ContentView: View {
     @State private var dataLoadingComplete = false
     @Binding var isLoading: Bool
 
+    @State private var lastNewAccountTime: Date = Date()
+    @State private var inactivityTimer: Timer?
+    
     var body: some View {
         ZStack{
             GeometryReader { geometry in
@@ -281,7 +284,7 @@ struct ContentView: View {
     func fetchData() {
          let startTime = Date()
          
-         // Your existing fetchInitialData logic here
+         //
          fetchInitialData { success in
              self.dataLoadingComplete = success
              let elapsedTime = Date().timeIntervalSince(startTime)
@@ -327,11 +330,30 @@ struct ContentView: View {
           accountsTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
               fetchAccountsData(retries: 3) { _ in }
           }
+          startInactivityTimer()
       }
 
       func stopAccountsTimer() {
           accountsTimer?.invalidate()
           accountsTimer = nil
+          stopInactivityTimer()
+      }
+    
+    
+    func startInactivityTimer() {
+          inactivityTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+              let timeSinceLastNewAccount = Date().timeIntervalSince(self.lastNewAccountTime)
+              // 1800 seconds = 30 minutes
+              if timeSinceLastNewAccount > 1800 {
+                  self.fetchActivityData(retries: 3) { _ in }
+                  self.lastNewAccountTime = Date()
+              }
+          }
+      }
+      
+      func stopInactivityTimer() {
+          inactivityTimer?.invalidate()
+          inactivityTimer = nil
       }
     
     func fetchActivityData(retries: Int, completion: @escaping (Bool) -> Void) {
@@ -497,18 +519,22 @@ struct ContentView: View {
     }
 
     func checkForNewAccounts(_ newAccounts: [Account]) {
+        var foundNewAccount = false
         for account in newAccounts {
             if !knownAccountIds.contains(account.id) {
                 sendNotification(for: account)
                 knownAccountIds.insert(account.id)
+                // if we have a new client then activity changed..
+                fetchActivityData(retries: 3) { _ in }
+                lastNewAccountTime = Date()
             }
         }
     }
 
     func sendNotification(for account: Account) {
         let content = UNMutableNotificationContent()
-        content.title = "New Account"
-        content.body = "\(account.name) - Status: \(account.recentlyOrdered ? "Completed their Order" : "Still pending")"
+        content.title = "Store Account"
+        content.body = "\(account.name) - Status: \(account.recentlyOrdered ? "Completed their Order" : "Still Building Order")"
         content.sound = UNNotificationSound.default
 
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
