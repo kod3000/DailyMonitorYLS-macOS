@@ -207,18 +207,6 @@ struct ContentView: View {
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(10)
                 
-                // Probability Chart Section
-                VStack {
-                    if let probability = probabilityResponse {
-                        BusyTimesChartView(busyTimesResponse: probability)
-                    } else {
-                        Text("Loading probability data...")
-                    }
-                }
-                .padding(10)
-                .frame(minHeight: 400)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
                 
                 // Customer Carts Section
                 VStack {
@@ -261,6 +249,21 @@ struct ContentView: View {
                 .padding(10)
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(10)
+                
+                // Probability Chart Section
+                VStack {
+                    if let probability = probabilityResponse {
+                        BusyTimesChartView(busyTimesResponse: probability)
+                    } else {
+                        Text("Loading probability data...")
+                    }
+                }
+                .padding(10)
+                .frame(minHeight: 400)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+                
+               
             }
             .padding(20)
             .frame(maxWidth: .infinity, alignment: .center)
