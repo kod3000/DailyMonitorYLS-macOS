@@ -1,15 +1,14 @@
 //
-//  ContentView.swift
-//  yliftdaily
+//  YLift Daily
 //
-//  Created by Nestor Rivera (aka dany.codes) on 6/25/24.
+//  Created by Nestor Rivera (aka dany.codes) on 6/30/24.
 //
 
 import SwiftUI
 import CoreData
 import SwiftUICharts
 import UserNotifications
-
+import AVFoundation
 
 struct ActivityResponse: Codable {
     let lastActive: String
@@ -62,9 +61,30 @@ struct DayProbability: Codable {
     }
 }
 
+struct VideoBackgroundView: NSViewRepresentable {
+    let player: AVPlayer
+        
+    func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = view.bounds
+        playerLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+        playerLayer.videoGravity = .resizeAspectFill  // video fills the view
+        view.layer = playerLayer
+        view.wantsLayer = true
+        return view
+    }
+    
+    func updateNSView(_ nsView: NSView, context: Context) {
+        if let playerLayer = nsView.layer as? AVPlayerLayer {
+            playerLayer.frame = nsView.bounds
+        }
+    }
+}
+
 struct BusyTimesChartView: View {
     let busyTimesResponse: ProbabilityResponse
-    let hourLabels = [ "1 am", "2 am", "3 am", "4 am", "5 am", "6 am", "7 am", "8 am", "9 am", "10 am", "11 am","12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm", "11 pm"]
+    let hourLabels = ["1 am", "2 am", "3 am", "4 am", "5 am", "6 am", "7 am", "8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm", "10 pm", "11 pm"]
     
     var body: some View {
         GeometryReader { geometry in
@@ -98,7 +118,7 @@ struct BusyTimesChartView: View {
                                             Rectangle()
                                                 .fill(Color.blue)
                                                 .opacity(value)
-                                                .frame(width: max(30, (geometry.size.width - 50) / 8),height: 10)
+                                                .frame(width: max(30, (geometry.size.width - 50) / 8), height: 10)
                                         }
                                     }
                                     .frame(height: 240)
@@ -120,7 +140,7 @@ struct BusyTimesChartView: View {
                         
                         HStack {
                             Text("Legend:")
-                                .padding(.top,3)
+                                .padding(.top, 3)
                                 .font(.headline)
                             ForEach([0.0, 0.25, 0.5, 0.75, 1.0], id: \.self) { value in
                                 VStack {
@@ -142,7 +162,7 @@ struct BusyTimesChartView: View {
                     .padding()
                     Text("Activity via Day & Hour")
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding([.trailing],5)
+                        .padding([.trailing], 5)
                         .font(.title)
 
                 }
@@ -180,105 +200,149 @@ struct ContentView: View {
 
     @State private var lastNewAccountTime: Date = Date()
     @State private var inactivityTimer: Timer?
+
+    @State private var player_background: AVPlayer
+    @State private var player_logo: AVPlayer
+    @State private var showMovie = true
+    @State private var hideUntil: Date?
+     
+    init(isLoading: Binding<Bool>) {
+        _isLoading = isLoading
+        let url_background = Bundle.main.url(forResource: "Snow", withExtension: "mov")!
+        let url_logo = Bundle.main.url(forResource: "Snow", withExtension: "mov")!
+
+        _player_background = State(initialValue: AVPlayer(url: url_background))
+        _player_logo = State(initialValue: AVPlayer(url: url_logo))
+     }
     
     var body: some View {
         ZStack{
-            GeometryReader { geometry in
-                Image("splash") 
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: geometry.size.width, height: geometry.size.height)
-                    .clipped()
-                    .opacity(0.015)
-            }
-            .edgesIgnoringSafeArea(.all)
-        ScrollView {
-            VStack(spacing: 20) {
-                // Activity Section
-                VStack {
-                    if let activity = activityResponse {
-                        HStack {
-                            Spacer()
-                            TimerView(lastActive: activity.lastActive, isActive: activity.isActive)
-                                .padding(5)
+          
+            ScrollView {
+                VStack(spacing: 20) {
+                    // Activity Section
+                    VStack {
+                        if let activity = activityResponse {
+                            HStack {
+                                Spacer()
+                                TimerView(lastActive: activity.lastActive, isActive: activity.isActive)
+                                    .padding(5)
+                            }
+                        } else {
+                            Text("Loading activity data...")
                         }
-                    } else {
-                        Text("Loading activity data...")
                     }
-                }
-                .padding(10)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
-                
-                
-                // Customer Carts Section
-                VStack {
-                    // Header titles
-                    HStack {
-                        Text("Name")
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        Text("Email")
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        Text("Status")
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    .padding(.bottom, 5)
+                    .padding(10)
+                    .background(Color.gray.opacity(0.05))
+                    .cornerRadius(10)
                     
-                    // Scrollable list
-                    ScrollView {
-                        LazyVStack(alignment: .leading, spacing: 10) {
-                            ForEach(accounts) { account in
-                                HStack {
-                                    Text(account.name)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    Text(account.email)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    Text(account.recentlyOrdered ? "Order is Completed" : "Building an Order..")
-                                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    // Customer Carts Section
+                    VStack {
+                        // Header titles
+                        HStack {
+                            Text("Name")
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text("Email")
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text("Status")
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .padding(.bottom, 5)
+                        
+                        // Scrollable list
+                        ScrollView {
+                            LazyVStack(alignment: .leading, spacing: 10) {
+                                ForEach(accounts) { account in
+                                    HStack {
+                                        Text(account.name)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                        Text(account.email)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                        Text(account.recentlyOrdered ? "Order is Completed" : "Building an Order..")
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                    }
                                 }
                             }
                         }
+                        .frame(height: 200)
+                        
+                        Text("Live Carts")
+                            .font(.title)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .padding(.top, 10)
                     }
-                    .frame(height: 200)
+                    .padding(10)
+                    .background(Color.gray.opacity(0.05))
+                    .cornerRadius(10)
                     
-                    Text("Live Carts")
-                        .font(.title)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding(.top, 10)
+                    // Probability Chart Section
+                    VStack {
+                        if let probability = probabilityResponse {
+                            BusyTimesChartView(busyTimesResponse: probability)
+                        } else {
+                            Text("Loading probability data...")
+                        }
+                    }
+                    .padding(10)
+                    .frame(minHeight: 400)
+                    .background(Color.gray.opacity(0.05))
+                    .cornerRadius(10)
                 }
-                .padding(10)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
-                
-                // Probability Chart Section
-                VStack {
-                    if let probability = probabilityResponse {
-                        BusyTimesChartView(busyTimesResponse: probability)
-                    } else {
-                        Text("Loading probability data...")
+                .padding(20)
+                .frame(maxWidth: .infinity, alignment: .center)
+            }
+            .onAppear {
+                fetchData()
+                stopAccountsTimer()
+            }
+            .onDisappear {
+                stopAccountsTimer()
+            }
+            if let activity = activityResponse, !activity.isActive && shouldShowMovie {
+                GeometryReader { geometry in
+                    ZStack{
+                        
+                        VideoBackgroundView(player: player_background)
+                            .edgesIgnoringSafeArea(.all)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .opacity(showMovie ? 1 : 0)
+                            .animation(.easeInOut(duration: 1), value: showMovie)
+                            .onAppear {
+                                player_background.play()
+                                player_background.actionAtItemEnd = .none
+                                NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player_background.currentItem, queue: .main) { _ in
+                                    player_background.seek(to: .zero)
+                                    player_background.play()
+                                }
+                            }
+                            .onTapGesture {
+                                hideMovieTemporaily()
+                            }
+                        VideoBackgroundView(player: player_logo)
+                            .edgesIgnoringSafeArea(.all)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .opacity(showMovie ? 1 : 0)
+                            .animation(.easeInOut(duration: 1), value: showMovie)
+                            .onAppear {
+                                player_logo.play()
+                                player_logo.actionAtItemEnd = .none
+                                NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player_logo.currentItem, queue: .main) { _ in
+                                    player_logo.seek(to: .zero)
+                                    player_logo.play()
+                                }
+                            }
+                            .onTapGesture {
+                                hideMovieTemporaily()
+                            }
                     }
                 }
-                .padding(10)
-                .frame(minHeight: 400)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
-                
-               
+                .edgesIgnoringSafeArea(.all)
             }
-            .padding(20)
-            .frame(maxWidth: .infinity, alignment: .center)
         }
-        .onAppear {
-            fetchData()
-            stopAccountsTimer()
-        }
-        .onDisappear {
-            stopAccountsTimer()
-        }
-    }
      }
     
     func fetchData() {
@@ -543,6 +607,26 @@ struct ContentView: View {
             }
         }
     }
+    
+    var shouldShowMovie: Bool {
+        if let hideUntil = hideUntil, hideUntil > Date() {
+            return false
+        }
+        return showMovie
+    }
+    
+    func hideMovieTemporaily() {
+        withAnimation(.easeInOut(duration: 1)) {
+            showMovie = false
+        }
+        hideUntil = Date().addingTimeInterval(20) //
+        DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+            withAnimation(.easeInOut(duration: 1)) {
+                showMovie = true
+                print("Showing movie again..")
+            }
+        }
+    }
 }
 
 struct TimerView: View {
@@ -559,22 +643,32 @@ struct TimerView: View {
             }
             .onDisappear {
                 stopTimer()
+            }.onChange(of: lastActive) { _ in
+                restartTimer()
             }
     }
     
     func startTimer() {
-        guard let lastActiveDate = DateFormatter.activityDateFormatter.date(from: lastActive) else { return }
-        elapsedTime = -lastActiveDate.timeIntervalSinceNow
-        
+        updateElapsedTime()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            elapsedTime += 1
+            updateElapsedTime()
         }
     }
     
     func stopTimer() {
         timer?.invalidate()
+        timer = nil
     }
     
+    func restartTimer() {
+        stopTimer()
+        startTimer()
+    }
+    
+    func updateElapsedTime() {
+        guard let lastActiveDate = DateFormatter.activityDateFormatter.date(from: lastActive) else { return }
+        elapsedTime = -lastActiveDate.timeIntervalSinceNow
+    }
     func formatTime(_ interval: TimeInterval) -> String {
         let hours = Int(interval) / 3600
         let minutes = (Int(interval) % 3600) / 60

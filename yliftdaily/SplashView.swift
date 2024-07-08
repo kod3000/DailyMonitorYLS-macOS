@@ -2,7 +2,7 @@
 //  SplashView.swift
 //  YLift Daily
 //
-//  Created by username on 6/30/24.
+//  Created by Nestor Rivera (aka dany.codes) on 6/30/24.
 //
 
 import SwiftUI
